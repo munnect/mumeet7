@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function HomeScreen() {
   return (
@@ -15,8 +15,8 @@ export default function HomeScreen() {
         borderBottomColor: '#F4F4F4'
       }}>
         <Text style={{ fontSize: 24, fontWeight: 'bold' }}>뮤밋</Text>
-        <TouchableOpacity>
-          <Text>알림</Text>
+        <TouchableOpacity style={{ padding: 5 }}>
+          <Ionicons name="notifications-outline" size={28} color="#333" />
         </TouchableOpacity>
       </View>
       
