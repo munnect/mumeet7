@@ -3,12 +3,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, StyleSheet, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../../screens/main/HomeScreen';
+import FavoritesScreen from '../../screens/main/FavoritesScreen';
+import ChatScreen from '../../screens/main/ChatScreen';
+import ProfileScreen from '../../screens/main/ProfileScreen';
 
-// 임시 스크린 컴포넌트들
-const FavoritesScreen = () => <View style={{ flex: 1, backgroundColor: 'white' }} />;
+// 임시 스크린 컴포넌트
 const CreateScreen = () => <View style={{ flex: 1, backgroundColor: 'white' }} />;
-const ChatScreen = () => <View style={{ flex: 1, backgroundColor: 'white' }} />;
-const ProfileScreen = () => <View style={{ flex: 1, backgroundColor: 'white' }} />;
 
 const Tab = createBottomTabNavigator();
 
