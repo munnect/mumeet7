@@ -6,15 +6,16 @@ import LoginRequiredModal from '../../components/LoginRequiredModal';
 export default function HomeScreen() {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
+  const handleNotificationPress = () => {
+    setShowLoginModal(true);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>뮤밋</Text>
-        <TouchableOpacity 
-          style={styles.notificationButton}
-          onPress={() => setShowLoginModal(true)}
-        >
-          <Ionicons name="notifications-outline" size={28} color="#333" />
+        <TouchableOpacity style={styles.notificationButton} onPress={handleNotificationPress}>
+          <Ionicons name="notifications-outline" size={26} color="#333" />
         </TouchableOpacity>
       </View>
       
@@ -110,7 +111,7 @@ export default function HomeScreen() {
         </View>
       </ScrollView>
 
-      <LoginRequiredModal 
+      <LoginRequiredModal
         visible={showLoginModal}
         onClose={() => setShowLoginModal(false)}
       />
@@ -127,17 +128,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F4F4F4',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
   },
   headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontWeight: '600',
+    color: '#333333',
   },
   notificationButton: {
-    padding: 5,
+    padding: 4,
   },
   scrollView: {
     flex: 1,

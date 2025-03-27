@@ -1,29 +1,47 @@
 import React from 'react';
-import { View, Text, Modal, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Modal, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
 
-interface LoginRequiredModalProps {
+type Props = {
   visible: boolean;
   onClose: () => void;
-}
+};
 
-export default function LoginRequiredModal({ visible, onClose }: LoginRequiredModalProps) {
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
+export default function LoginRequiredModal({ visible, onClose }: Props) {
+  const navigation = useNavigation<NavigationProp>();
+
+  const handleLogin = () => {
+    onClose();
+    navigation.navigate('Login');
+  };
+
   return (
     <Modal
-      transparent
-      visible={visible}
       animationType="fade"
+      transparent={true}
+      visible={visible}
       onRequestClose={onClose}
     >
-      <Pressable style={styles.overlay} onPress={onClose}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.message}>로그인이 필요한 서비스입니다.</Text>
-            <TouchableOpacity style={styles.loginButton} onPress={onClose}>
-              <Text style={styles.loginButtonText}>로그인/회원가입 하기</Text>
-            </TouchableOpacity>
-          </View>
+      <View style={styles.overlay}>
+        <View style={styles.modalContent}>
+          <Text style={styles.title}>로그인이 필요한 서비스입니다.</Text>
+          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+            <Text style={styles.loginButtonText}>로그인/회원가입하기</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.closeButton} 
+            onPress={onClose}
+          >
+            <View style={styles.closeButtonBox}>
+              <Text style={styles.closeButtonText}>닫기</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-      </Pressable>
+      </View>
     </Modal>
   );
 }
@@ -35,32 +53,52 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalContainer: {
-    width: '85%',
+  modalContent: {
     backgroundColor: 'white',
     borderRadius: 12,
-    padding: 20,
-  },
-  modalContent: {
+    padding: 24,
+    width: '80%',
     alignItems: 'center',
   },
-  message: {
+  title: {
     fontSize: 16,
     fontWeight: '500',
     marginBottom: 20,
+    textAlign: 'center',
     color: '#333',
   },
   loginButton: {
     backgroundColor: '#DD797C',
-    paddingVertical: 14,
-    paddingHorizontal: 28,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
     borderRadius: 8,
-    width: '90%',
+    width: '100%',
+    marginBottom: 12,
   },
   loginButtonText: {
     color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  closeButton: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  closeButtonBox: {
+    width: '100%',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    backgroundColor: '#F5F5F5',
+    borderWidth: 1,
+    borderColor: '#EEEEEE',
+  },
+  closeButtonText: {
+    color: '#666',
+    fontSize: 16,
+    fontWeight: '500',
     textAlign: 'center',
   },
 }); 

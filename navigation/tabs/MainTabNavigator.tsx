@@ -3,14 +3,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, StyleSheet, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../../screens/main/HomeScreen';
-import FavoritesScreen from '../../screens/main/FavoritesScreen';
-import ChatScreen from '../../screens/main/ChatScreen';
-import ProfileScreen from '../../screens/main/ProfileScreen';
+import LoginRequiredScreen from '../../screens/main/LoginRequiredScreen';
+import { MainTabParamList } from '../types';
 
 // 임시 스크린 컴포넌트
 const CreateScreen = () => <View style={{ flex: 1, backgroundColor: 'white' }} />;
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<MainTabParamList>();
 
 export default function MainTabNavigator() {
   return (
@@ -21,13 +20,15 @@ export default function MainTabNavigator() {
         tabBarActiveTintColor: '#DD797C',
         tabBarInactiveTintColor: '#999999',
         headerShown: false,
+        tabBarItemStyle: {
+          paddingHorizontal: 0,
+        },
         tabBarLabelStyle: {
           fontSize: 12,
-          marginBottom: Platform.OS === 'ios' ? 0 : 5,
+          marginTop: 4,
         },
-        tabBarItemStyle: {
-          paddingVertical: 8,
-        }
+        freezeOnBlur: true,
+        lazy: false,
       }}
     >
       <Tab.Screen
@@ -37,7 +38,7 @@ export default function MainTabNavigator() {
           tabBarIcon: ({ focused, color }) => (
             <Ionicons 
               name={focused ? "home" : "home-outline"} 
-              size={26} 
+              size={24} 
               color={color} 
             />
           ),
@@ -45,12 +46,12 @@ export default function MainTabNavigator() {
       />
       <Tab.Screen
         name="관심"
-        component={FavoritesScreen}
+        component={() => <LoginRequiredScreen title="관심목록" />}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Ionicons 
               name={focused ? "heart" : "heart-outline"} 
-              size={26} 
+              size={24} 
               color={color} 
             />
           ),
@@ -61,29 +62,24 @@ export default function MainTabNavigator() {
         component={CreateScreen}
         options={{
           tabBarIcon: ({ focused, color }) => (
-            <View style={{ marginTop: -1 }}>
+            <View style={{ marginTop: 0 }}>
               <Ionicons 
                 name={focused ? "add-circle" : "add-circle-outline"}
-                size={28} 
+                size={26} 
                 color={color} 
               />
             </View>
           ),
-          tabBarLabelStyle: {
-            fontSize: 12,
-            marginTop: 1,
-            marginBottom: Platform.OS === 'ios' ? 0 : 5,
-          }
         }}
       />
       <Tab.Screen
         name="채팅"
-        component={ChatScreen}
+        component={() => <LoginRequiredScreen title="채팅" />}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Ionicons 
               name={focused ? "chatbubble" : "chatbubble-outline"} 
-              size={26} 
+              size={24} 
               color={color} 
             />
           ),
@@ -91,12 +87,12 @@ export default function MainTabNavigator() {
       />
       <Tab.Screen
         name="프로필"
-        component={ProfileScreen}
+        component={() => <LoginRequiredScreen title="내 프로필" />}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Ionicons 
               name={focused ? "person" : "person-outline"} 
-              size={26} 
+              size={24} 
               color={color} 
             />
           ),
@@ -112,13 +108,7 @@ const styles = StyleSheet.create({
     paddingBottom: Platform.OS === 'ios' ? 30 : 5,
     paddingHorizontal: 10,
     backgroundColor: 'white',
-    borderTopColor: '#f0f0f0',
+    borderTopColor: '#e0e0e0',
     borderTopWidth: 1,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    elevation: 0,
-    shadowOpacity: 0,
   },
 }); 

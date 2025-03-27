@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "mumeet7",
+    "name": "뮤밋",
     "slug": "mumeet7",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,16 +13,40 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mumeet.app",
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+          "kakaokompassauth",
+          "kakaolink"
+        ],
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "kakao40e6e457f7c728abd08240f47ff0d267"
+            ]
+          }
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mumeet.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "@react-native-seoul/kakao-login",
+        {
+          "kakaoAppKey": "40e6e457f7c728abd08240f47ff0d267",
+          "overrideKakaoSDKVersion": "2.19.0"
+        }
+      ]
+    ]
   }
 }

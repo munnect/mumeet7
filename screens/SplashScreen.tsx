@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function SplashScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const fadeAnim = new Animated.Value(0);
   const scaleAnim = new Animated.Value(0.8);
   const translateYAnim = new Animated.Value(20);
@@ -14,7 +18,7 @@ export default function SplashScreen() {
       Animated.parallel([
         Animated.timing(fadeAnim, {
           toValue: 1,
-          duration: 800,
+          duration: 600,
           useNativeDriver: true,
         }),
         Animated.spring(scaleAnim, {
@@ -25,17 +29,17 @@ export default function SplashScreen() {
         }),
         Animated.timing(translateYAnim, {
           toValue: 0,
-          duration: 800,
+          duration: 600,
           useNativeDriver: true,
         }),
       ]),
       // 잠시 대기
-      Animated.delay(500),
+      Animated.delay(300),
     ]).start();
 
     const timer = setTimeout(() => {
-      navigation.replace('Main');
-    }, 2000);
+      navigation.replace('MainTab');
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
