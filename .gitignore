@@ -80,3 +80,27 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+# Only ignore node_modules and environment files
+node_modules/
+.env*.local
+.DS_Store
+*.log
+
+# Keep all project files including build files
+!build/
+!dist/
+!web-build/
+!.expo/
+!ios/Pods/
+!.gradle
+!*.pbxuser
+!*.perspectivev3
+!xcuserdata
+!*.xccheckout
+!DerivedData
+!*.hmap
+!*.ipa
+!project.xcworkspace
+!*.keystore
+!*.jsbundle
