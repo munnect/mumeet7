@@ -1,120 +1,66 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, SafeAreaView, StyleSheet, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import LoginRequiredModal from '../../components/LoginRequiredModal';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
-  const [showLoginModal, setShowLoginModal] = useState(false);
-
-  const handleNotificationPress = () => {
-    setShowLoginModal(true);
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>뮤밋</Text>
-        <TouchableOpacity style={styles.notificationButton} onPress={handleNotificationPress}>
-          <Ionicons name="notifications-outline" size={26} color="#333" />
-        </TouchableOpacity>
+        <Text style={styles.logo}>뮤닛</Text>
       </View>
-      
-      <ScrollView style={styles.scrollView}>
-        {/* Zone Selection */}
-        <View style={styles.zoneContainer}>
-          <TouchableOpacity style={styles.zoneButton}>
-            <View style={styles.zoneContent}>
-              <View>
-                <Text style={styles.zoneTitle}>의뢰존</Text>
-                <Text style={styles.zoneSubtitle}>믹싱·마스터링·작곡 의뢰</Text>
-              </View>
-              <Ionicons name="musical-notes" size={24} color="white" />
-            </View>
+      <ScrollView style={styles.content}>
+        <View style={styles.categoryContainer}>
+          <TouchableOpacity style={[styles.categoryCard, styles.pinkCard]}>
+            <Text style={styles.categoryTitle}>의뢰존</Text>
+            <Text style={styles.categorySubtitle}>믹싱·마스터링·작곡 의뢰</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.zoneButton, styles.teamZone]}>
-            <View style={styles.zoneContent}>
-              <View>
-                <Text style={styles.zoneTitle}>팀업존</Text>
-                <Text style={styles.zoneSubtitle}>음악 파트너 & 프로젝트 모집</Text>
-              </View>
-              <Ionicons name="people" size={24} color="white" />
-            </View>
+          <TouchableOpacity style={[styles.categoryCard, styles.blueCard]}>
+            <Text style={styles.categoryTitle}>팀업존</Text>
+            <Text style={styles.categorySubtitle}>음악 파트너 & 프로젝트 모집</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Real-time Projects */}
-        <View style={styles.sectionContainer}>
+        <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <View style={styles.sectionTitleContainer}>
-              <Ionicons name="flash" size={20} color="#FFD700" />
-              <Text style={styles.sectionTitle}>실시간 프로젝트</Text>
-            </View>
+            <Text style={styles.sectionTitle}>⚡ 실시간 프로젝트</Text>
             <TouchableOpacity>
-              <Text style={styles.viewAllButton}>전체보기</Text>
+              <Text style={styles.seeAllButton}>전체보기</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView 
-            horizontal 
-            showsHorizontalScrollIndicator={false}
-            style={styles.projectsScroll}
-          >
-            {/* Project Card Example */}
-            <TouchableOpacity style={styles.projectCard}>
-              <View style={styles.projectCategory}>
-                <Text style={styles.categoryText}>믹싱</Text>
-              </View>
+          <View style={styles.projectCard}>
+            <View style={styles.projectTag}>
+              <Text style={styles.tagText}>믹싱</Text>
+            </View>
+            <Text style={styles.projectTitle}>프로젝트 제목이 들어갑니다</Text>
+            <Text style={styles.projectDescription}>프로젝트 설명이 들어갑니다. 두 줄까지 표시됩니다.</Text>
+            <View style={styles.projectInfo}>
               <Text style={styles.projectPrice}>50만원</Text>
-              <Text style={styles.projectTitle}>프로젝트 제목이 들어갑니다</Text>
-              <Text style={styles.projectDescription}>프로젝트 설명이 들어갑니다. 두 줄까지 표시됩니다.</Text>
-              <View style={styles.projectFooter}>
-                <Text style={styles.projectStatus}>방금 전</Text>
-                <Text style={styles.projectViews}>조회 12</Text>
-              </View>
-            </TouchableOpacity>
-            {/* Add more project cards here */}
-          </ScrollView>
-        </View>
-
-        {/* My Projects */}
-        <View style={styles.sectionContainer}>
-          <View style={styles.sectionHeader}>
-            <View style={styles.sectionTitleContainer}>
-              <Ionicons name="musical-notes" size={20} color="#DD797C" />
-              <Text style={styles.sectionTitle}>내 프로젝트</Text>
+              <Text style={styles.projectViews}>조회 12</Text>
             </View>
+          </View>
+        </View>
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>🎵 내 프로젝트</Text>
             <TouchableOpacity>
-              <Text style={styles.viewAllButton}>전체보기</Text>
+              <Text style={styles.seeAllButton}>전체보기</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView 
-            horizontal 
-            showsHorizontalScrollIndicator={false}
-            style={styles.projectsScroll}
-          >
-            {/* Project Card Example */}
-            <TouchableOpacity style={styles.projectCard}>
-              <View style={styles.progressBar}>
-                <View style={[styles.progressFill, { width: '75%' }]} />
-              </View>
-              <Text style={styles.projectStatus}>작업중</Text>
-              <Text style={styles.projectTitle}>진행중인 프로젝트</Text>
-              <Text style={styles.projectDescription}>현재 진행중인 프로젝트 설명입니다.</Text>
-              <View style={styles.projectFooter}>
-                <Text style={styles.progressText}>진행률 75%</Text>
-                <TouchableOpacity style={styles.chatButton}>
-                  <Text style={styles.chatButtonText}>채팅하기</Text>
-                </TouchableOpacity>
-              </View>
+          <View style={styles.projectCard}>
+            <View style={styles.projectProgress}>
+              <Text style={styles.progressText}>작업중</Text>
+            </View>
+            <Text style={styles.projectTitle}>진행중인 프로젝트</Text>
+            <Text style={styles.projectDescription}>현재 진행중인 프로젝트 설명입니다.</Text>
+            <View style={styles.progressBar}>
+              <View style={[styles.progressFill, { width: '75%' }]} />
+            </View>
+            <Text style={styles.progressPercentage}>진행률 75%</Text>
+            <TouchableOpacity style={styles.continueButton}>
+              <Text style={styles.continueButtonText}>채팅하기</Text>
             </TouchableOpacity>
-            {/* Add more project cards here */}
-          </ScrollView>
+          </View>
         </View>
       </ScrollView>
-
-      <LoginRequiredModal
-        visible={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-      />
     </SafeAreaView>
   );
 }
@@ -122,158 +68,142 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
   },
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: '600',
-    color: '#333333',
+  logo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#DD797C',
   },
-  notificationButton: {
-    padding: 4,
-  },
-  scrollView: {
+  content: {
     flex: 1,
   },
-  zoneContainer: {
+  categoryContainer: {
+    flexDirection: 'row',
     padding: 16,
     gap: 12,
   },
-  zoneButton: {
-    backgroundColor: '#DD797C',
+  categoryCard: {
+    flex: 1,
+    padding: 16,
     borderRadius: 12,
-    padding: 20,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    height: 100,
   },
-  teamZone: {
-    backgroundColor: '#4A90E2',
+  pinkCard: {
+    backgroundColor: '#FFE5E5',
   },
-  zoneContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  blueCard: {
+    backgroundColor: '#E5F0FF',
   },
-  zoneTitle: {
-    color: 'white',
+  categoryTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 4,
+    marginBottom: 8,
   },
-  zoneSubtitle: {
-    color: 'rgba(255, 255, 255, 0.9)',
+  categorySubtitle: {
     fontSize: 14,
+    color: '#666',
   },
-  sectionContainer: {
-    marginTop: 24,
-    paddingHorizontal: 16,
+  section: {
+    padding: 16,
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16,
-  },
-  sectionTitleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
+    marginBottom: 12,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
   },
-  viewAllButton: {
+  seeAllButton: {
     color: '#666',
-    fontSize: 14,
-  },
-  projectsScroll: {
-    marginBottom: 16,
   },
   projectCard: {
-    width: 280,
-    backgroundColor: 'white',
-    borderRadius: 12,
     padding: 16,
-    marginRight: 12,
+    borderRadius: 12,
+    backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: '#F0F0F0',
+    borderColor: '#eee',
   },
-  projectCategory: {
-    backgroundColor: '#F8F8F8',
-    alignSelf: 'flex-start',
+  projectTag: {
+    backgroundColor: '#eee',
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 4,
+    alignSelf: 'flex-start',
     marginBottom: 8,
   },
-  categoryText: {
-    color: '#666',
+  tagText: {
     fontSize: 12,
-  },
-  projectPrice: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#DD797C',
-    marginBottom: 8,
+    color: '#666',
   },
   projectTitle: {
     fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 4,
+    fontWeight: 'bold',
+    marginBottom: 8,
   },
   projectDescription: {
     fontSize: 14,
     color: '#666',
-    marginBottom: 12,
+    marginBottom: 8,
   },
-  projectFooter: {
+  projectInfo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
-  projectStatus: {
-    fontSize: 12,
-    color: '#999',
+  projectPrice: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#DD797C',
   },
   projectViews: {
+    fontSize: 14,
+    color: '#666',
+  },
+  projectProgress: {
+    backgroundColor: '#E5F0FF',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+    alignSelf: 'flex-start',
+    marginBottom: 8,
+  },
+  progressText: {
     fontSize: 12,
-    color: '#999',
+    color: '#0066FF',
   },
   progressBar: {
     height: 4,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: '#eee',
     borderRadius: 2,
-    marginBottom: 12,
+    marginVertical: 8,
   },
   progressFill: {
     height: '100%',
     backgroundColor: '#DD797C',
     borderRadius: 2,
   },
-  progressText: {
-    fontSize: 12,
-    color: '#DD797C',
+  progressPercentage: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 12,
   },
-  chatButton: {
+  continueButton: {
     backgroundColor: '#DD797C',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 6,
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
   },
-  chatButtonText: {
-    color: 'white',
-    fontSize: 12,
-    fontWeight: '500',
+  continueButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 }); 

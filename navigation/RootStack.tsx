@@ -22,7 +22,14 @@ export default function RootStack() {
         component={LoginScreen}
         options={{
           presentation: 'modal',
-          animation: 'slide_from_bottom'
+          animation: 'slide_from_bottom',
+          headerShown: true,
+          headerTitle: '로그인',
+          headerTitleAlign: 'center',
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
         }}
       />
     </Stack.Navigator>

@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function ChatScreen() {
+export default function UploadScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.title}>채팅</Text>
+        <Text style={styles.title}>프로젝트 등록</Text>
       </View>
     </SafeAreaView>
   );

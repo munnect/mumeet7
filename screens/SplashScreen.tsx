@@ -1,65 +1,27 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/types';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../navigation/types';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type SplashScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Splash'>;
 
 export default function SplashScreen() {
-  const navigation = useNavigation<NavigationProp>();
-  const fadeAnim = new Animated.Value(0);
-  const scaleAnim = new Animated.Value(0.8);
-  const translateYAnim = new Animated.Value(20);
+  const navigation = useNavigation<SplashScreenNavigationProp>();
 
   useEffect(() => {
-    Animated.sequence([
-      // 위로 살짝 떠오르면서 페이드인 & 스케일
-      Animated.parallel([
-        Animated.timing(fadeAnim, {
-          toValue: 1,
-          duration: 600,
-          useNativeDriver: true,
-        }),
-        Animated.spring(scaleAnim, {
-          toValue: 1,
-          tension: 20,
-          friction: 7,
-          useNativeDriver: true,
-        }),
-        Animated.timing(translateYAnim, {
-          toValue: 0,
-          duration: 600,
-          useNativeDriver: true,
-        }),
-      ]),
-      // 잠시 대기
-      Animated.delay(300),
-    ]).start();
-
+    // Add your initialization logic here
     const timer = setTimeout(() => {
       navigation.replace('MainTab');
-    }, 1500);
+    }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
-      <Animated.Text
-        style={[
-          styles.logo,
-          {
-            opacity: fadeAnim,
-            transform: [
-              { scale: scaleAnim },
-              { translateY: translateYAnim }
-            ],
-          },
-        ]}
-      >
-        뮤밋
-      </Animated.Text>
+      <Text style={styles.logo}>뮤닛</Text>
+      <ActivityIndicator size="large" color="#DD797C" style={styles.indicator} />
     </View>
   );
 }
@@ -67,14 +29,17 @@ export default function SplashScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
   },
   logo: {
-    fontSize: 52,
-    fontWeight: '600',
+    fontSize: 48,
+    fontWeight: 'bold',
     color: '#DD797C',
-    letterSpacing: -1,
+    marginBottom: 20,
+  },
+  indicator: {
+    marginTop: 20,
   },
 }); 

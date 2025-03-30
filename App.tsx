@@ -1,15 +1,13 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RootStack from './navigation/RootStack';
+import { getProfile, login } from '@react-native-seoul/kakao-login';
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <RootStack />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
   );
 }
 

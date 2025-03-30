@@ -1,152 +1,71 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/types';
-import { Ionicons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import LoginRequiredModal from '../../components/LoginRequiredModal';
 
-interface Props {
-  title: string;
-}
-
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
-export default function LoginRequiredScreen({ title }: Props) {
-  const navigation = useNavigation<NavigationProp>();
-  const [showLoginModal, setShowLoginModal] = useState(false);
-
-  const handleNotificationPress = () => {
-    setShowLoginModal(true);
-  };
+export default function LoginRequiredScreen() {
+  const navigation = useNavigation();
 
   const handleLogin = () => {
     navigation.navigate('Login');
   };
 
-  const getIcon = () => {
-    switch (title) {
-      case '관심목록':
-        return <Ionicons name="heart" size={48} color="#DD797C" />;
-      case '채팅':
-        return <Ionicons name="chatbubble" size={48} color="#DD797C" />;
-      case '내 프로필':
-        return <Ionicons name="person" size={48} color="#DD797C" />;
-      default:
-        return null;
-    }
-  };
-
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>{title}</Text>
-          <TouchableOpacity style={styles.notificationButton} onPress={handleNotificationPress}>
-            <Ionicons name="notifications-outline" size={26} color="#333" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.divider} />
-        
-        <View style={styles.content}>
-          <View style={styles.iconContainer}>
-            {getIcon()}
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.title}>
-              {title} 서비스를{'\n'}이용하시겠어요?
-            </Text>
-            <Text style={styles.message}>
-              로그인하고 다양한 기능을 경험해보세요!
-            </Text>
-          </View>
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>로그인/회원가입하기</Text>
-          </TouchableOpacity>
-        </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.content}>
+        <Icon name="chat-question" size={80} color="#DD797C" style={styles.icon} />
+        <Text style={styles.title}>채팅 서비스를 이용하시겠어요?</Text>
+        <Text style={styles.description}>
+          로그인하고 다양한 기능을{'\n'}
+          이용해보세요
+        </Text>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>로그인/회원가입 하기</Text>
+        </TouchableOpacity>
       </View>
-
-      <LoginRequiredModal 
-        visible={showLoginModal} 
-        onClose={() => setShowLoginModal(false)} 
-      />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    backgroundColor: '#ffffff',
-  },
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: '600',
-    color: '#333333',
-  },
-  notificationButton: {
-    padding: 4,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#fff',
   },
   content: {
     flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    padding: 20,
   },
-  iconContainer: {
-    width: 72,
-    height: 72,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  textContainer: {
-    alignItems: 'center',
-    marginTop: 16,
-    marginBottom: 32,
+  icon: {
+    marginBottom: 20,
   },
   title: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#333333',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
     textAlign: 'center',
-    lineHeight: 32,
-    marginBottom: 12,
   },
-  message: {
+  description: {
     fontSize: 16,
-    color: '#666666',
+    color: '#666',
     textAlign: 'center',
+    marginBottom: 30,
+    lineHeight: 24,
   },
   button: {
     backgroundColor: '#DD797C',
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 12,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 8,
     width: '100%',
-    maxWidth: 300,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#ffffff',
+    color: '#fff',
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: 'bold',
   },
 }); 
